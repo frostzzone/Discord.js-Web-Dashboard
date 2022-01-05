@@ -1,5 +1,6 @@
 module.exports = (app, config, themeConfig, modules) => {
     app.use('/discord', require('./Routes/discord'));
+    app.use('/discord2', require('./Routes/discord2'));
 
     if (config.useUnderMaintenance) {
         app.get(config.underMaintenanceAccessPage || '/total-secret-get-access', (req, res) => {
