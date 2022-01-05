@@ -6,11 +6,11 @@ const DBDStats = require('../ExternalStatistics/index');
 
 router.get('/', (req, res) => {
     const clientId = req.client.id;
-    const redirectUri2 = req.redirectUri2;
+    const redirectUri = req.redirectUri;
 
     req.session.r = req.query.r || '/';
 
-    const authorizeUrl = `https://discordapp.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri2)}&response_type=code&scope=${scopes.join('%20')}`;
+    const authorizeUrl = `https://discordapp.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${scopes.join('%20')}`;
     res.redirect(authorizeUrl);
 });
 
@@ -78,16 +78,16 @@ router.get('/callback', (req, res) => {
                                         try {
                                             res4.json();
                                         }catch(error){
-                                            return res.redirect(req.session.r || '/');
+                                            return res.redirect(req.session.r || '/pinger');
                                         }
                                     }).then(json5 => {
-                                        res.redirect(req.session.r || '/');
+                                        res.redirect(req.session.r || '/pinger');
                                     })
                                 }catch(err){
-                                    return res.redirect(req.session.r || '/');
+                                    return res.redirect(req.session.r || '/pinger');
                                 }
                             } else {
-                                res.redirect(req.session.r || '/');
+                                res.redirect(req.session.r || '/pinger');
                             }
                         });
 
